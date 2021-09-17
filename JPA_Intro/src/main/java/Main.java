@@ -1,3 +1,4 @@
+import at.kaindorf.intro.pojos.Address;
 import at.kaindorf.intro.pojos.Student;
 
 import javax.persistence.EntityManager;
@@ -16,15 +17,13 @@ public class Main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU_JPA_Intro");
         EntityManager em = emf.createEntityManager();
 
-        Student s = new Student();
-        s.setFirstname("Jonas");
-        s.setLastname("Seidl");
-        s.setDateOfBirth(LocalDate.of(2002, Month.AUGUST,20));
+        Student s = new Student("5DHIF", Long.valueOf(22), "Jonas", "Seidl", LocalDate.of(2002, Month.AUGUST,20));
+        Address a = new Address("Paldau","Perlsdorf","122");
+        s.setAddress(a);
 
         em.getTransaction().begin();
         em.persist(s);
         em.getTransaction().commit();
-
 
         em.close();
         emf.close();
