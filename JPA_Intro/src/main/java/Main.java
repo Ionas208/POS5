@@ -1,4 +1,5 @@
 import at.kaindorf.intro.pojos.Address;
+import at.kaindorf.intro.pojos.SchoolClass;
 import at.kaindorf.intro.pojos.Student;
 
 import javax.persistence.EntityManager;
@@ -22,7 +23,10 @@ public class Main {
         s.setAddress(a);
 
         em.getTransaction().begin();
-        em.persist(s);
+        SchoolClass sc = new SchoolClass("5DHIF");
+        sc.addStudent(s);
+
+        em.persist(sc);
         em.getTransaction().commit();
 
         em.close();

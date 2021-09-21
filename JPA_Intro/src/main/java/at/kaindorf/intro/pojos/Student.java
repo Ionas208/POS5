@@ -8,7 +8,6 @@ import lombok.NonNull;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.UUID;
 
 /*
     Created by: Jonas Seidl
@@ -44,11 +43,18 @@ public class Student implements Serializable {
     @OneToOne(cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Address address;
 
+    @ManyToOne
+    private SchoolClass className;
+
     public Student(@NonNull String classname, @NonNull long catNo, @NonNull String firstname, @NonNull String lastname, @NonNull LocalDate dateOfBirth) {
         this.classname = classname;
         this.catNo = catNo;
         this.firstname = firstname;
         this.lastname = lastname;
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public void setClassName(SchoolClass className) {
+        this.className = className;
     }
 }
