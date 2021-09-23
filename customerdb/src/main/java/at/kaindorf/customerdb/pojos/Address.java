@@ -39,19 +39,30 @@ public class Address {
     @Column(name = "city", length = 100)
     private String city;
 
-    @NonNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="country")
     private Country country;
 
     @OneToMany(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Customer> customers = new ArrayList<>();
 
-    public void addAddress(Customer c){
+    public void addCustomer(Customer c){
         if(!customers.contains(c)){
             customers.add(c);
            c.setAddress(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "addressId=" + addressId +
+                ", streetName='" + streetName + '\'' +
+                ", streetNumber=" + streetNumber +
+                ", postalCode='" + postalCode + '\'' +
+                ", city='" + city + '\'' +
+                ", country=" + country +
+                '}';
     }
 }
 

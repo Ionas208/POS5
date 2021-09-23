@@ -1,10 +1,16 @@
 package at.kaindorf.customerdb.pojos;
 
 import at.kaindorf.customerdb.json.CustomerDeserializer;
+import at.kaindorf.customerdb.xml.CustomerAdapter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
 /*
@@ -18,6 +24,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @JsonDeserialize(using = CustomerDeserializer.class)
+@XmlRootElement(name = "customer")
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlJavaTypeAdapter(CustomerAdapter.class)
 public class Customer {
     @Id
     @GeneratedValue
@@ -26,6 +35,7 @@ public class Customer {
 
     @NonNull
     @Column(name = "firstname", length = 100)
+    @XmlElement
     private String firstname;
 
     @NonNull
@@ -48,8 +58,20 @@ public class Customer {
     @Column(name = "since")
     private LocalDate since;
 
-    @NonNull
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address")
     private Address address;
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerID=" + customerID +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", gender=" + gender +
+                ", active=" + active +
+                ", email='" + email + '\'' +
+                ", since=" + since +
+                '}';
+    }
 }

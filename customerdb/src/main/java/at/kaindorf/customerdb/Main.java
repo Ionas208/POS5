@@ -11,6 +11,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 
 /*
     Created by: Jonas Seidl
@@ -21,13 +22,19 @@ public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU_CUSTOMERDB");
         EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+        //List<Customer> customers = ImportHandler.readCustomersJSON();
+        List<Customer> customers = ImportHandler.readCustomersXML();
 
+        System.out.println(customers.get(0));
+        em.getTransaction().begin();
+        for (Customer c: customers) {
+            em.persist(c);
+        }
         em.getTransaction().commit();
 
         em.close();
         emf.close();
 
-        ImportHandler.readCustomersJSON();
+
     }
 }

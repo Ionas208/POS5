@@ -3,14 +3,11 @@ package at.kaindorf.customerdb.json;
 import at.kaindorf.customerdb.pojos.Address;
 import at.kaindorf.customerdb.pojos.Country;
 import at.kaindorf.customerdb.pojos.Customer;
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -35,24 +32,29 @@ public class CustomerDeserializer extends StdDeserializer<Customer> {
     public Customer deserialize(JsonParser p, DeserializationContext dc) throws IOException, JsonProcessingException {
 
         JsonNode node = dc.readValue(p, JsonNode.class);
-        String c = node.get("country").toString();
-        String country_code = node.get("country_code").toString();
+        String c = node.get("country").toString().replace("\"","");
+        String country_code = node.get("country_code").toString().replace("\"","");
         Country country = new Country(c, country_code);
 
-        String streetname = node.get("streetname").toString();
+        String streetname = node.get("streetname").toString().replace("\"","");
         int streetnumber = Integer.parseInt(node.get("streetnumber").toString().replace("\"",""));
-        String postal_code = node.get("postal_code").toString();
-        String city = node.get("city").toString();
-        Address address = new Address(streetname, streetnumber, postal_code, city, country);
+        String postal_code = node.get("postal_code").toString().replace("\"","");
+        String city = node.get("city").toString().replace("\"","");
+        Address address = new Address(streetname, streetnumber, postal_code, city);
 
+        country.addAddress(address);
 
-        String firstname = node.get("firstname").toString();
-        String lastname = node.get("lastname").toString();
-        char gender = node.get("gender").toString().charAt(0);
-        boolean active = Boolean.parseBoolean(node.get("active").toString());
-        String email = node.get("email").toString();
+        String firstname = node.get("firstname").toString().replace("\"","");
+        String lastname = node.get("lastname").toString().replace("\"","");
+        char gender = node.get("gender").toString().charAt(1);
+        boolean active = Boolean.parseBoolean(node.get("active").toString().replace("\"",""));
+        String email = node.get("email").toString().replace("\"","");
         String sinceText = node.get("since").toString().replace("\"","");
         LocalDate since = LocalDate.parse(sinceText, DTF);
-        return new Customer(firstname, lastname, gender, active, email, since, address);
+        Customer customer = new Customer(firstname, lastname, gender, active, email, since);
+
+        address.addCustomer(customer);
+
+        return customer;
     }
 }

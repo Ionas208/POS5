@@ -4,7 +4,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /*
     Created by: Jonas Seidl
@@ -17,6 +19,9 @@ import java.util.List;
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class Country {
+
+    public static Set<Country> countries = new HashSet<>();
+
     @Id
     @GeneratedValue
     @Column(name = "country_id")
@@ -39,5 +44,14 @@ public class Country {
             addresses.add(a);
             a.setCountry(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Country{" +
+                "countryId=" + countryId +
+                ", name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                '}';
     }
 }
