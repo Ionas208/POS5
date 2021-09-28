@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name="student")
+@Entity
 @IdClass(StudentPK.class)
 public class Student implements Serializable {
     @Id

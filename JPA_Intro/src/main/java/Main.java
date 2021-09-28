@@ -2,11 +2,10 @@ import at.kaindorf.intro.pojos.Address;
 import at.kaindorf.intro.pojos.SchoolClass;
 import at.kaindorf.intro.pojos.Student;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 
 /*
     Created by: Jonas Seidl
@@ -14,6 +13,7 @@ import java.time.Month;
     Time: 09:29
 */
 public class Main {
+
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU_JPA_Intro");
         EntityManager em = emf.createEntityManager();
@@ -28,6 +28,15 @@ public class Main {
 
         em.persist(sc);
         em.getTransaction().commit();
+
+        TypedQuery<Student> typedQuery = em.createQuery("SELECT s FROM Student s", Student.class);
+        List<Student> students = typedQuery.getResultList();
+        System.out.println(students);
+
+        TypedQuery<Address> namedQuery = em.createNamedQuery("Address.GetAll", Address.class);
+        namedQuery.setParameter("city","Paldau");
+        List<Address> addresses = namedQuery.getResultList();
+        System.out.println(addresses);
 
         em.close();
         emf.close();

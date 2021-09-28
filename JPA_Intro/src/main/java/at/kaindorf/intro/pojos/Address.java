@@ -13,10 +13,14 @@ import java.io.Serializable;
     Date: 16.09.2021
     Time: 10:02
 */
-@Entity(name="address")
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedQueries({
+        @NamedQuery(name="Address.GetAll", query = "SELECT a FROM Address a WHERE a.city = :city"),
+        @NamedQuery(name="Address.GetByClassname", query = "SELECT a FROM Address a"),
+})
 public class Address implements Serializable {
     @Id
     @GeneratedValue

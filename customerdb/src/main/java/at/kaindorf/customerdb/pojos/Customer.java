@@ -1,10 +1,12 @@
 package at.kaindorf.customerdb.pojos;
 
 import at.kaindorf.customerdb.json.CustomerDeserializer;
+import at.kaindorf.customerdb.util.BidirectionalUtil;
 import at.kaindorf.customerdb.xml.CustomerAdapter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.*;
 
+import javax.inject.Named;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -12,21 +14,24 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 /*
     Created by: Jonas Seidl
     Date: 21.09.2021
     Time: 08:52
 */
-@Entity(name="customer")
+@Entity
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 @RequiredArgsConstructor
 @JsonDeserialize(using = CustomerDeserializer.class)
-@XmlRootElement(name = "customer")
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlJavaTypeAdapter(CustomerAdapter.class)
+@NamedQueries({
+        @NamedQuery(name="Customer.FindYears", query = "SELECT DISTINCT EXTRACT(YEAR from c.since) FROM Customer c"),
+        @NamedQuery(name="Customer.CountAll", query = "SELECT COUNT(c) FROM Customer c"),
+        @NamedQuery(name="Customer.FindFromCountry", query = "SELECT c FROM Customer c WHERE c.address.country.code = :country_code")
+})
 public class Customer {
     @Id
     @GeneratedValue
@@ -74,4 +79,11 @@ public class Customer {
                 ", since=" + since +
                 '}';
     }
+
+    public void setAddress(Address address) {
+        address = BidirectionalUtil.getUniqueAddress(address);
+        this.address = address;
+    }
+
+
 }

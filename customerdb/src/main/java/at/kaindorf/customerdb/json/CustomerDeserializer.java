@@ -32,17 +32,6 @@ public class CustomerDeserializer extends StdDeserializer<Customer> {
     public Customer deserialize(JsonParser p, DeserializationContext dc) throws IOException, JsonProcessingException {
 
         JsonNode node = dc.readValue(p, JsonNode.class);
-        String c = node.get("country").toString().replace("\"","");
-        String country_code = node.get("country_code").toString().replace("\"","");
-        Country country = new Country(c, country_code);
-
-        String streetname = node.get("streetname").toString().replace("\"","");
-        int streetnumber = Integer.parseInt(node.get("streetnumber").toString().replace("\"",""));
-        String postal_code = node.get("postal_code").toString().replace("\"","");
-        String city = node.get("city").toString().replace("\"","");
-        Address address = new Address(streetname, streetnumber, postal_code, city);
-
-        country.addAddress(address);
 
         String firstname = node.get("firstname").toString().replace("\"","");
         String lastname = node.get("lastname").toString().replace("\"","");
@@ -53,7 +42,20 @@ public class CustomerDeserializer extends StdDeserializer<Customer> {
         LocalDate since = LocalDate.parse(sinceText, DTF);
         Customer customer = new Customer(firstname, lastname, gender, active, email, since);
 
+        String streetname = node.get("streetname").toString().replace("\"","");
+        int streetnumber = Integer.parseInt(node.get("streetnumber").toString().replace("\"",""));
+        String postal_code = node.get("postal_code").toString().replace("\"","");
+        String city = node.get("city").toString().replace("\"","");
+        Address address = new Address(streetname, streetnumber, postal_code, city);
+
+        String c = node.get("country").toString().replace("\"","");
+        String country_code = node.get("country_code").toString().replace("\"","");
+        Country country = new Country(c, country_code);
+
+        country.addAddress(address);
+        address.setCountry(country);
         address.addCustomer(customer);
+        customer.setAddress(address);
 
         return customer;
     }

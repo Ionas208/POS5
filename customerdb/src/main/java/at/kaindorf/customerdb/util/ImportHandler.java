@@ -46,9 +46,12 @@ public class ImportHandler {
     public static List<Customer> readCustomersXML(){
         ClassLoader classLoader = ImportHandler.class.getClassLoader();
         File file = new File(classLoader.getResource("customers.xml").getFile());
-        List<CustomerXML> customers = JAXB.unmarshal(file, CustomerList.class).getCustomers();
-        System.out.println(customers);
-        return null;
+        List<CustomerXML> customersXML = JAXB.unmarshal(file, CustomerList.class).getCustomers();
+        List<Customer> customers = new ArrayList<>();
+        for (CustomerXML c: customersXML) {
+            customers.add(convertCustomer(c));
+        }
+        return customers;
     }
 
     private static Customer convertCustomer(CustomerXML xml){
@@ -58,24 +61,22 @@ public class ImportHandler {
         boolean active = Boolean.parseBoolean(xml.getActive());
         String email = xml.getEmail();
         LocalDate since = LocalDate.parse(xml.getSince(), DTF);
-
         Customer customer = new Customer(firstname, lastname, gender, active, email, since);
 
         String streetName = xml.getStreetname();
         int streetNumber = Integer.parseInt(xml.getStreetnumber());
         String city = xml.getCity();
         String postal_code = xml.getPostal_code();
-
         Address address = new Address(streetName, streetNumber, postal_code, city);
-
-        address.addCustomer(customer);
 
         String countryName = xml.getCountry();
         String countryCode = xml.getCountry_code();
-
         Country country = new Country(countryName, countryCode);
 
         country.addAddress(address);
+        address.setCountry(country);
+        address.addCustomer(customer);
+        customer.setAddress(address);
 
         return customer;
     }
