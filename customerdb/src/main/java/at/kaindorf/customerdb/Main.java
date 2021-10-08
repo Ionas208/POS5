@@ -26,10 +26,7 @@ public class Main {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU_CUSTOMERDB");
         EntityManager em = emf.createEntityManager();
 
-
         Scanner scanner = new Scanner(System.in);
-        boolean exit = false;
-        do{
             System.out.println("-------------");
             System.out.println("-----JPA-----");
             System.out.println("-------------");
@@ -119,14 +116,6 @@ public class Main {
                         doQuery = false;
                 }
             }while(doQuery);
-            System.out.println("Exit? [Y\\N]");
-            String doExit = scanner.nextLine();
-            switch(doExit.toUpperCase()){
-                case "Y":
-                    exit = true;
-                    break;
-            }
-        }while(!exit);
 
         em.close();
         emf.close();
