@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="plf_ubung_school:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>plf_ubung_school</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="school-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="plf_ubung_school:war exploded" />
+    </root>
+  </artifact>
+</component>
