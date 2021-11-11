@@ -7,6 +7,7 @@
 <body>
     <h1>Design your Burger</h1>
     <form method="POST" th:object="${designBurger}">
+        <span th:if="${#fields.hasErrors('ingredients')}" th:errors="*{ingredients}">Ingredient error</span>
         <div th:each="key: ${ingredients.keySet()}">
             <div>Choose your <span th:text="${key}">Type</span></div>
             <div th:each="ingredient: ${ingredients.get(key)}">
@@ -14,6 +15,8 @@
                 <span th:text="${ingredient.name}">Ingredient</span>
             </div>
         </div>
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"> Name error</span><br>
+        <input type="text" th:field="*{name}">
         <button type="submit">Submit</button>
     </form>
 </body>

@@ -5,11 +5,10 @@ import at.kaindorf.burger.pojos.Ingredient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -21,6 +20,7 @@ import java.util.stream.Collectors;
 @Controller
 @Slf4j
 @RequestMapping("/design")
+@SessionAttributes("designBurger")
 public class BurgerController {
 
     private List<Ingredient> ingredients = Arrays.asList(
@@ -57,8 +57,11 @@ public class BurgerController {
     }
 
     @PostMapping
-    public String processBurger(@ModelAttribute("designBurger") Burger burger){
-        log.info(burger.toString());
-        return "designForm";
+    public String processBurger(@Valid @ModelAttribute("designBurger") Burger burger, Errors errors){
+        if(errors.hasErrors()){
+            log.info(errors.getAllErrors().toString());
+            return "designForm";
+        }
+        return "redirect:/orders/current";
     }
 }

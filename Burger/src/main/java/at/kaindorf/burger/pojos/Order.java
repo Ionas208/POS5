@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /*
@@ -15,7 +16,10 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Order implements Serializable {
+    @NotBlank
     private String name;
+    @NotBlank
     private String street;
+    @NotBlank
     private String city;
 }
