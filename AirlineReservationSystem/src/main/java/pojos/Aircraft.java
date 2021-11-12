@@ -25,6 +25,7 @@ public class Aircraft implements Serializable {
 
 
     @ManyToOne
+    @JoinColumn(name = "airline_name")
     private Airline airline;
 
     @ManyToOne

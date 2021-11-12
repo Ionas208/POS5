@@ -25,7 +25,7 @@ public class Airline implements Serializable {
     private int id;
 
     @Id
-    @Column(name="airline_name")
+    @Column(name="airline_name", length = 40)
     private String name;
 
     @OneToMany(mappedBy = "airline")

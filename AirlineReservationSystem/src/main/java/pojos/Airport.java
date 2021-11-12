@@ -23,13 +23,13 @@ public class Airport implements Serializable {
     @Column(name="airport_id")
     private int id;
 
-    @Column(name="name")
+    @Column(name="name", length = 60)
     private String name;
 
-    @Column(name="country")
+    @Column(name="country", length = 60)
     private String country;
 
-    @Column(name="city")
+    @Column(name="city", length = 50)
     private String city;
 
     @ManyToMany(mappedBy = "airports")

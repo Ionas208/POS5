@@ -17,6 +17,21 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "aircraftsFromAirlineOnAirport", query = "SELECT COUNT(ac) FROM Airport ap join ap.aircrafts ac join ac.airline al " +
+                "WHERE ap.name = :airport AND al.name = :airline"),
+        @NamedQuery(name = "flightsFromAirport", query = "SELECT COUNT(f) FROM Flight f WHERE f.departure_airport.name = :airport"),
+        @NamedQuery(name = "aircraftTypesFromAirline", query = "SELECT COUNT(ac.type.name) FROM Aircraft ac WHERE ac.airline.name = :airline GROUP BY ac.type.name "),
+        @NamedQuery(name = "departureFlightsFromAirlineInTimeSpan", query = "SELECT f FROM Flight f " +
+                "WHERE f.departure > :start_date AND f.departure < :end_date AND f.airline.name = :airline"),
+        @NamedQuery(name = "flightsFromAirport", query = "SELECT COUNT(f) FROM Flight f GROUP BY f.departure_airport.name"),
+        @NamedQuery(name = "flightsFromAirline", query = "SELECT COUNT(f) FROM Flight f GROUP BY f.airline.name"),
+        @NamedQuery(name = "arrivalFlightsFromAirlineInTimeSpan", query = "SELECT f FROM Flight f " +
+                "WHERE f.arrival > :start_date AND f.arrival < :end_date AND f.airline.name = :airline"),
+        @NamedQuery(name = "mostFlightsToCountry", query = "SELECT f.arrival_airport.country, COUNT(f) FROM Flight f GROUP BY f.arrival_airport.country"),
+        @NamedQuery(name = "mostFlightsFromCountry", query = "SELECT f.arrival_airport.country, COUNT(f) FROM Flight f GROUP BY f.departure_airport.country"),
+        @NamedQuery(name = "mostFlightsToCity", query = "SELECT MAX(COUNT(f)) FROM Flight f GROUP BY f.arrival_airport.city"),
+})
 public class Flight implements Serializable {
     @Id
     @GeneratedValue
@@ -28,6 +43,7 @@ public class Flight implements Serializable {
     private Aircraft aircraft;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="airline_name")
     private Airline airline;
 
     @Column(name="departure_time")
