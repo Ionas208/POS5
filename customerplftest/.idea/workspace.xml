@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dab72b41-00f9-4948-8442-c5d6aaa85de2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/kaindorf/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/kaindorf/customer/bl/Import.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/kaindorf/customer/pojos/Address.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/kaindorf/customer/pojos/Country.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/kaindorf/customer/pojos/Customer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/kaindorf/customer/pojos/Dummy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/kaindorf/customer/pojos/DummyList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/kaindorf/customer/pojos/LocalDateAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/kaindorf/customer/pojos/LocalDateSerializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/customers.xml" afterDir="false" />
-    </list>
+    <list default="true" id="dab72b41-00f9-4948-8442-c5d6aaa85de2" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,7 +31,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/META-INF" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../AirlineReservationSystem" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -71,19 +60,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -100,6 +76,7 @@
       <updated>1636646252341</updated>
       <workItem from="1636646253475" duration="3888000" />
       <workItem from="1636652686413" duration="2509000" />
+      <workItem from="1637237482471" duration="18000" />
     </task>
     <servers />
   </component>

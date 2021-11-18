@@ -1,11 +1,10 @@
 package pojos;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -19,18 +18,43 @@ import java.util.List;
 @Entity
 @IdClass(AirlinePK.class)
 public class Airline implements Serializable {
+
+    private static final int NAME_LEN = 40;
+
     @Id
     @GeneratedValue
     @Column(name="airline_id")
     private int id;
 
     @Id
-    @Column(name="airline_name", length = 40)
+    @Column(name="airline_name", length = NAME_LEN)
     private String name;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @OneToMany(mappedBy = "airline")
-    private List<Aircraft> aircrafts;
+    private List<Aircraft> aircrafts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "airline", orphanRemoval = true)
-    private List<Flight> flights;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "airline")
+    private List<Flight> flights = new ArrayList<>();
+
+    public Airline(String line){
+        String[] parts = line.split(",");
+        String name = parts[1].trim();
+        this.name = name.length() > NAME_LEN ? name.substring(0, NAME_LEN) : name;
+    }
+
+    public void addAircraft(Aircraft aircraft){
+        if(!aircrafts.contains(aircraft)){
+            aircrafts.add(aircraft);
+        }
+    }
+
+    public void addFlight(Flight flight){
+        if(!flights.contains(flight)){
+            flights.add(flight);
+        }
+    }
 }

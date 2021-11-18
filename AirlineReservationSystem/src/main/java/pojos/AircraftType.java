@@ -20,14 +20,23 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 public class AircraftType implements Serializable {
+    private static final int NAME_LEN = 50;
+
     @Id
     @GeneratedValue
     @Column(name="aircraft_type_id")
     private int id;
 
-    @Column(name="type_name", length = 50)
+    @Column(name="type_name", length = NAME_LEN)
     private String name;
 
     @Column(name="seats")
     private int seats;
+
+    public AircraftType(String line){
+        String[] parts = line.split(",");
+        String name = parts[1].trim();
+        this.name = name.length() > NAME_LEN ? name.substring(0, NAME_LEN) : name;
+        this.seats = Integer.parseInt(parts[8]);
+    }
 }

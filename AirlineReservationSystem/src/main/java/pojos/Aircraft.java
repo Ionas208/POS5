@@ -1,11 +1,10 @@
 package pojos;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -16,6 +15,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Entity
 public class Aircraft implements Serializable {
     @Id
@@ -24,22 +24,38 @@ public class Aircraft implements Serializable {
     private int id;
 
 
+    @NonNull
     @ManyToOne
-    @JoinColumn(name = "airline_name")
+    @JoinColumns({
+            @JoinColumn(name="airline_id", referencedColumnName = "airline_id"),
+            @JoinColumn(name="airline_name", referencedColumnName = "airline_name")
+    })
     private Airline airline;
 
+    @NonNull
     @ManyToOne
     @JoinColumn(name="aircraft_type_id")
     private AircraftType type;
 
-    @OneToMany(mappedBy = "aircraft", orphanRemoval = true)
-    private List<Flight> flights;
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "aircraft")
+    private List<Flight> flights = new ArrayList<>();
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @ManyToMany
     @JoinTable(
             name="aircraft_airport",
             joinColumns ={@JoinColumn(name="aircraft_id")},
             inverseJoinColumns ={@JoinColumn(name="airport_id")}
     )
-    private List<Airport> airports;
+    private List<Airport> airports = new ArrayList<>();
+
+    public void addAirport(Airport airport){
+        if(!airports.contains(airport)){
+            airports.add(airport);
+            airport.addAircraft(this);
+        }
+    }
 }
