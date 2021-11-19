@@ -15,19 +15,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/c8be8887-dbf9-47b2-ab5f-2431093c8c0e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c8be8887-dbf9-47b2-ab5f-2431093c8c0e.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pojos/Aircraft.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pojos/Aircraft.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pojos/AircraftType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pojos/AircraftType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pojos/Airline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pojos/Airline.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pojos/Airport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pojos/Airport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pojos/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pojos/Flight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pojos/Aircraft.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pojos/Aircraft.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pojos/AircraftType.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pojos/AircraftType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pojos/Airline.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pojos/Airline.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pojos/Airport.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pojos/Airport.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/pojos/Flight.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/pojos/Flight.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../customerplftest/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../customerplftest/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,15 +141,6 @@
       <workItem from="1636101745342" duration="1607000" />
       <workItem from="1636700699399" duration="44000" />
       <workItem from="1636716478219" duration="1300000" />
-      <workItem from="1637237501946" duration="142000" />
-      <workItem from="1637237655130" duration="288000" />
-      <workItem from="1637238086280" duration="3310000" />
-      <workItem from="1637241582943" duration="182000" />
-      <workItem from="1637241859550" duration="40000" />
-      <workItem from="1637241911788" duration="65000" />
-      <workItem from="1637241987488" duration="1666000" />
-      <workItem from="1637243681614" duration="433000" />
-      <workItem from="1637244130651" duration="2190000" />
     </task>
     <servers />
   </component>
