@@ -69,6 +69,7 @@ public class Main {
         for (Flight f: flights) {
             em.persist(f);
         }
+
         /**
          * ----------------------------------------------------------------------------------
          * IF YOU WANT TO TEST, REMOVE "javax.persistence.schema-generation.database.action"

@@ -2,7 +2,10 @@ package at.kaindorf.burger.controller;
 
 import at.kaindorf.burger.pojos.Burger;
 import at.kaindorf.burger.pojos.Ingredient;
+import at.kaindorf.burger.repo.BurgerRepository;
+import at.kaindorf.burger.repo.IngredientRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -23,18 +26,15 @@ import java.util.stream.Collectors;
 @SessionAttributes("designBurger")
 public class BurgerController {
 
-    private List<Ingredient> ingredients = Arrays.asList(
-            new Ingredient("120B", "120g Ground Beef", Ingredient.Type.PATTY),
-            new Ingredient("160B", "160g Ground Beef", Ingredient.Type.PATTY),
-            new Ingredient("140T", "140g Turkey", Ingredient.Type.PATTY),
-            new Ingredient("TOMA", "Tomato", Ingredient.Type.VEGGIE),
-            new Ingredient("SALA", "Salad", Ingredient.Type.VEGGIE),
-            new Ingredient("CHED", "Cheddar", Ingredient.Type.CHEESE),
-            new Ingredient("GOUD", "Gouda", Ingredient.Type.CHEESE)
-    );
+    @Autowired
+    private IngredientRepository ingredientRepository;
+    @Autowired
+    private BurgerRepository burgerRepository;
+    private List<Ingredient> ingredients;
 
     @ModelAttribute
     public void addAttributes(Model model){
+        this.ingredients = ingredientRepository.findAll();
         Map<String, List<Ingredient>> ingredients = new HashMap<>();
 
         for(Ingredient.Type t: Ingredient.Type.values()){
@@ -62,6 +62,7 @@ public class BurgerController {
             log.info(errors.getAllErrors().toString());
             return "designForm";
         }
+        burgerRepository.save(burger);
         return "redirect:/orders/current";
     }
 }

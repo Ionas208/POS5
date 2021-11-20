@@ -4,22 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b6f175fb-69b3-4968-bcd1-f373860b99c0" name="Changes" comment="Changes">
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/Import.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/io/RandomData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/aircrafttypes.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/airlines.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/airports.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/pojos/FlightTest.java" afterDir="false" />
+    <list default="true" id="65289eab-d611-4c61-96a2-909d192bdc87" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/c8be8887-dbf9-47b2-ab5f-2431093c8c0e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/c8be8887-dbf9-47b2-ab5f-2431093c8c0e.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pojos/Aircraft.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pojos/Aircraft.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pojos/AircraftType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pojos/AircraftType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pojos/Airline.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pojos/Airline.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pojos/Airport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pojos/Airport.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pojos/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pojos/Flight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +55,7 @@
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.notifications" />
+    <property name="settings.editor.selected.configurable" value="preferences.intentionPowerPack" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">

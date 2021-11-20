@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
     Created by: Jonas Seidl
@@ -15,11 +18,18 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity(name = "burger_order")
 public class Order implements Serializable {
+    @Id
+    @GeneratedValue
+    private Long id;
     @NotBlank
     private String name;
     @NotBlank
     private String street;
     @NotBlank
     private String city;
+
+    @OneToMany(mappedBy = "order")
+    private List<Burger> burgers = new ArrayList<>();
 }
