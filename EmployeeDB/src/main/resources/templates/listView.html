@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Employees</title>
+</head>
+<body>
+    <form method="GET" th:object="${chosenDept}">
+        <select th:each="dept: ${departments}">
+            <option th:value="${dept}" th:text="${dept.deptName}">
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+    <div  th:each="emp: ${employees}">
+        <div><span th:text="${emp.firstname}"></span></div>
+    </div>
+</body>
+</html>
