@@ -21,14 +21,4 @@ import java.util.List;
 @NoArgsConstructor
 public class EmployeeUtil {
     private List<Integer> toRemove = new ArrayList<>();
-
-    @Size(min = 1, max = 50,message = "Firstname must be at least one character long")
-    private String firstname;
-    @Size(min = 1, max = 50,message = "Lastname must be at least one character long")
-    private String lastname;
-    private String gender;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Past
-    private LocalDate dateOfBirth;
-    private String deptNo;
 }

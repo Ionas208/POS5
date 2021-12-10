@@ -10,8 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -24,7 +26,7 @@ import java.util.List;
 @Controller
 @Slf4j
 @RequestMapping("/insert")
-@SessionAttributes({"employeeUtil"})
+@SessionAttributes({"departments", "employee"})
 public class InsertEmployeeController {
     @Autowired
     private EmployeeRepository employeeRepository;
@@ -33,7 +35,7 @@ public class InsertEmployeeController {
 
     @ModelAttribute
     public void addAttributes(Model model){
-        model.addAttribute("employeeUtil", new EmployeeUtil());
+        model.addAttribute("employee", new Employee());
         model.addAttribute("departments", departmentRepository.findAll());
     }
 
@@ -43,14 +45,16 @@ public class InsertEmployeeController {
     }
 
     @PostMapping
-    public String insertEmployee(Model model, @ModelAttribute("employeeUtil") EmployeeUtil employeeUtil){
-        Department d = departmentRepository.findById(employeeUtil.getDeptNo()).get();
-        Employee e = new Employee(employeeUtil.getFirstname(), employeeUtil.getLastname(), Gender.valueOf(employeeUtil.getGender()), employeeUtil.getDateOfBirth());
-        e.setDepartment(d);
+    public String insertEmployee(Model model, @Valid @ModelAttribute("employee") Employee emp, Errors errors){
+        if(errors.hasErrors()){
+            log.info(errors.getAllErrors().toString());
+            return "insertView";
+        }
         Integer empNo = employeeRepository.findMaxEmployeeNo()+1;
-        e.setEmployeeNo(empNo);
-        employeeRepository.save(e);
+        emp.setEmployeeNo(empNo);
+        employeeRepository.save(emp);
         employeeRepository.flush();
+
         return "redirect:/list";
     }
 }

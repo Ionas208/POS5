@@ -3,26 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert new Employee</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
-    <form method="POST" th:object="${employeeUtil}">
-        <label>Firstname: </label>
-        <input type="text" th:field="*{firstname}"><br>
-        <label>Lastname: </label>
-        <input type="text" th:field="*{lastname}"><br>
-        <label>Date of Birth: </label>
-        <input type="date" th:field="*{dateOfBirth}"><br>
-        <label>Gender: </label>
-        <select th:field="*{gender}">
-            <option th:value="M">male</option>
-            <option th:value="F">female</option>
-        </select><br>
-        <label>Department: </label>
-        <select th:field="*{deptNo}">
-            <option th:each="dept: ${departments}" th:text="${dept.deptName}" th:value="${dept.deptNo}">
-        </select><br>
+    <div class="container">
+        <h1>Insert new Employee</h1>
+        <form method="POST" th:object="${employee}">
+            <fieldset class="input_fs">
+                <legend>Firstname</legend>
+                <input type="text" th:field="*{firstname}"><br>
+                <ul>
+                    <li th:each="err : ${#fields.errors('firstname')}" th:text="${err}" class="error" />
+                </ul>
+            </fieldset>
 
-        <button type="submit">Add New Employee</button>
-    </form>
+
+            <fieldset class="input_fs">
+                <legend>Lastname</legend>
+                <input type="text" th:field="*{lastname}"><br>
+                <ul>
+                    <li th:each="err : ${#fields.errors('lastname')}" th:text="${err}" class="error" />
+                </ul>
+            </fieldset>
+
+
+            <fieldset class="input_fs">
+                <legend>Date of Birth</legend>
+                <input type="date" th:field="*{dateOfBirth}"><br>
+                <ul>
+                    <li th:each="err : ${#fields.errors('dateOfBirth')}" th:text="${err}" class="error" />
+                </ul>
+            </fieldset>
+
+
+            <fieldset class="input_fs">
+                <legend>Gender</legend>
+                <select th:field="*{gender}">
+                    <option th:value="M">Male</option>
+                    <option th:value="F">Female</option>
+                </select><br>
+                <ul>
+                    <li th:each="err : ${#fields.errors('gender')}" th:text="${err}" class="error" />
+                </ul>
+            </fieldset>
+
+
+            <fieldset class="input_fs">
+                <legend>Department</legend>
+                <select th:field="*{department}">
+                    <option th:each="dept: ${departments}" th:text="${dept.deptName}" th:value="${dept.deptNo}">
+                </select><br>
+                <ul>
+                    <li th:each="err : ${#fields.errors('department')}" th:text="${err}" class="error" />
+                </ul>
+            </fieldset>
+
+            <button type="submit">Add New Employee</button>
+        </form>
+    </div>
 </body>
 </html>

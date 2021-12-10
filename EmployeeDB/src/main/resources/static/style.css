@@ -1,0 +1,54 @@
+body, html{
+    margin: 0;
+    font-family: "Open Sans";
+}
+
+.container{
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+.filter, .insert{
+    width: 10%;
+    margin-bottom: 30px;
+}
+
+.remove{
+    width: 20%;
+    margin-bottom: 10px;
+}
+
+.input_fs{
+    width: 20%;
+    margin-bottom: 20px;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th, td{
+    padding: 10px;
+}
+
+th{
+    text-align: center;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.error{
+    color: red;
+}
+
+.manager{
+    font-weight: bold;
+    color: #516dff
+}
