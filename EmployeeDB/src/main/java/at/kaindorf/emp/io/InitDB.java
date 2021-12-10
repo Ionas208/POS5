@@ -15,9 +15,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /*
     Created by: Jonas Seidl
@@ -49,10 +47,38 @@ public class InitDB {
     }
 
     public List<Department> getDepartments() throws IOException {
-
         List<Department> departments;
         ObjectMapper om = new ObjectMapper();
         departments = new ArrayList<>(Arrays.asList(om.readValue(filepath.toFile(), Department[].class)));
-        return departments;
+
+
+        Set<Department> uniqueDepartments = new HashSet<>();
+        Set<Employee> uniqueEmployees = new HashSet<>();
+        for (Department d: departments) {
+            uniqueDepartments.add(d);
+            for (Employee employee: d.getEmployees()) {
+                uniqueEmployees.add(employee);
+            }
+        }
+
+        for (Department d: uniqueDepartments) {
+            List<Employee> employees = new ArrayList<>();
+            for (Employee e: d.getEmployees()) {
+                Employee unique = null;
+                for (Employee ue: uniqueEmployees) {
+                    if(e.getEmployeeNo() == ue.getEmployeeNo()) {
+                        unique = ue;
+                        unique.setDepartment(d);
+                        break;
+                    }
+                }
+                employees.add(unique);
+            }
+            d.setEmployees(employees);
+
+            d.getDeptManager().setDepartment(d);
+        }
+
+        return new ArrayList<>(departments);
     }
 }

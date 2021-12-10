@@ -6,13 +6,45 @@
 </head>
 <body>
     <form method="GET" th:object="${chosenDept}">
-        <select th:each="dept: ${departments}">
-            <option th:value="${dept}" th:text="${dept.deptName}">
-        </select>
-        <button type="submit">Submit</button>
+        <div>
+            <label>Filter by Department: &nbsp</label>
+            <select th:field="*{deptNo}">
+                <option th:if="${chosenDept != null}" th:text="${chosenDept.deptName}" th:value="${chosenDept.deptNo}"></option>
+                <option th:unless="${chosenDept != null}"></option>
+                <option th:each="dept: ${departments}" th:text="${dept.deptName}" th:value="${dept.deptNo}">
+            </select>
+            <button type="submit">Filter</button>
+        </div>
     </form>
-    <div  th:each="emp: ${employees}">
-        <div><span th:text="${emp.firstname}"></span></div>
-    </div>
+
+    <a href="insert">Insert new Employee</a>
+
+    <form method="POST" th:object="${employeeUtil}">
+        <label>Remove Selected Employee From Department</label>
+        <button type="submit">Submit</button>
+        <table border="1">
+            <thead>
+                <th>Lastname</th>
+                <th>Firstname</th>
+                <th>Date of Birth</th>
+                <th>Gender</th>
+                <th>Department</th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr th:each="emp: ${employees}">
+                    <td><span th:text="${emp.lastname}"></span></td>
+                    <td><span th:text="${emp.firstname}"></span></td>
+                    <td><span th:text="${emp.dateOfBirth}"></span></td>
+                    <td><span th:text="${emp.gender}"></span></td>
+                    <td>
+                        <span th:if="${emp.department != null}" th:text="${emp.department.deptName}"></span>
+                        <span th:unless="${emp.department != null}"> No department</span>
+                    </td>
+                    <td><input name="toRemove" type="checkbox" th:value="${emp.employeeNo}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
 </body>
 </html>
