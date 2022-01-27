@@ -7,8 +7,35 @@
 <body>
     <h1>Customers</h1>
 
-    <form method="POST" th:object="${searchUtil}">
-        <input type="text" name="lastname" th:value="" placeholder="Lastname...">
+    <form method="POST" th:object="${util}">
+        <input type="text"th:field="*{lastname}" placeholder="Lastname..."/>
+        <input type="submit" value="Search"/>
     </form>
+
+    <table th:if="${customers != null}">
+        <thead>
+            <tr>
+                <th>Firstname</th>
+                <th>Lastname</th>
+                <th>Number</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr th:each="c: ${customers}" onclick="submit();">
+                    <td th:text="${c.firstname}"></td>
+                    <td th:text="${c.lastname}"></td>
+                    <td th:text="${c.customerNumber}"></td>
+                    <form th:method="GET" th:action="@{/detail}" th:object="${util}">
+                        <td>
+                            <input type="hidden" name="customerId" th:value="${c.customerId}">
+                            <input type="submit" value="View Details">
+                            <!--input type="hidden" th:field="*{customerId}" th:value="${c.customerId}">
+                            <input type="checkbox" th:field="*{customerId}" th:value="${c.customerId}" onclick="submit();"-->
+
+                        </td>
+                    </form>
+                </tr>
+        </tbody>
+    </table>
 </body>
 </html>

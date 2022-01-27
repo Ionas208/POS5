@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class SearchUtil {
+public class Util {
     private String lastname;
+    private Long customerId;
 }

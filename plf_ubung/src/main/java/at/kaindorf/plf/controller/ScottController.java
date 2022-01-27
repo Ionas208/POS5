@@ -51,7 +51,8 @@ public class ScottController {
     @PostMapping
     public String selectDept(Model model, @ModelAttribute("util") Util util){
         Department d = departmentRepository.findById(util.getChosenDeptNo()).get();
-        //Map<Employee, Salgrade> empSalMap = employeeRepository.findAllWithSalgrade();
+        Map<Employee, Salgrade> empSalMap = employeeRepository.findAllWithSalgrade();
+        System.out.println(empSalMap);
         List<Employee> emps = employeeRepository.findAllByDept(d);
         model.addAttribute("employees", emps);
         return "scottView";

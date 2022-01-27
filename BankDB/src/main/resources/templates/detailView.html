@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Customers</title>
+</head>
+<body>
+    <h2>Giro Accounts</h2>
+    <table th:if="${giros != null}">
+        <thead>
+            <tr>
+                <th>Account Number</th>
+                <th>Balance</th>
+                <th>Overdraft</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="g: ${giros}">
+                <td th:text="${g.accountNumber}"></td>
+                <td th:text="${g.balance}"></td>
+                <td th:text="${g.overdraft}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Savings Accounts</h2>
+    <table th:if="${savings != null}">
+        <thead>
+        <tr>
+            <th>Account Number</th>
+            <th>Balance</th>
+            <th>Interest</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="s: ${savings}">
+            <td th:text="${s.accountNumber}"></td>
+            <td th:text="${s.balance}"></td>
+            <td th:text="${s.interest}"></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

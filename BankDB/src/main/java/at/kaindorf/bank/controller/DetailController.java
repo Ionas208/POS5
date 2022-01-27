@@ -1,29 +1,32 @@
 package at.kaindorf.bank.controller;
 
 import at.kaindorf.bank.pojos.Customer;
+import at.kaindorf.bank.pojos.GiroAccount;
+import at.kaindorf.bank.pojos.SavingsAccount;
 import at.kaindorf.bank.pojos.Util;
 import at.kaindorf.bank.repo.AddressRepository;
 import at.kaindorf.bank.repo.CustomerRepository;
 import at.kaindorf.bank.repo.GiroAccountRepository;
 import at.kaindorf.bank.repo.SavingsAccountRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.List;
 
 /*
     Created by: Jonas Seidl
-    Date: 22.12.2021
-    Time: 15:12
+    Date: 27.01.2022
+    Time: 15:26
 */
 @Controller
-@Slf4j
-@RequestMapping("/list")
-@SessionAttributes({"customers", "util", "customer"})
-public class ListController {
+@SessionAttributes({"util", "giros", "savings"})
+@RequestMapping("/detail")
+public class DetailController {
     @Autowired
     private SavingsAccountRepository savingsAccountRepository;
     @Autowired
@@ -35,21 +38,19 @@ public class ListController {
 
     @ModelAttribute
     public void addAttributes(Model model){
-        List<Customer> customers = customerRepository.findAll();
-        model.addAttribute("customers", customers);
-        model.addAttribute("customer", new Customer());
         model.addAttribute("util", new Util());
     }
 
     @GetMapping
-    public String list(Model model){
-        return "listView";
-    }
+    public String getCustomer(@ModelAttribute("util") Util util, Model model){
+        System.out.println(util);
+        Customer c = customerRepository.findById(util.getCustomerId()).get();
+        System.out.println(c.getAccounts());
 
-    @PostMapping
-    public String search(@ModelAttribute("util") Util searchUtil, Model model){
-        List<Customer> customers = customerRepository.findAllByLastnameContaining(searchUtil.getLastname());
-        model.addAttribute("customers", customers);
-        return "listView";
+        //model.addAttribute("giros", giroAccounts);
+        //model.addAttribute("savings", savingsAccounts);
+        model.addAttribute("customer", c);
+
+        return "detailView";
     }
 }

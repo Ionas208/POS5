@@ -19,6 +19,10 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@NamedQueries({
+        @NamedQuery(name = "Employee.findAllWithSalgrade",
+                query = "SELECT e FROM emp e INNER JOIN Salgrade s ON e.sal BETWEEN s.losal AND s.hisal")
+})
 public class Employee {
     @Id
     private Integer empno;

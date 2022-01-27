@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
 /*
     Created by: Jonas Seidl
@@ -17,8 +19,11 @@ import javax.persistence.Entity;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@DiscriminatorValue("Savings")
+@DiscriminatorValue("SPAR")
 public class SavingsAccount extends Account {
     @Column(name="interest")
     private Double interest;
+
+    /*@ManyToMany(mappedBy = "savingsAccounts")
+    private List<Customer> customer;*/
 }

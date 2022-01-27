@@ -46,4 +46,16 @@ public class Customer {
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "account_id"))
     private List<Account> accounts;
+
+    /*@ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "customer_giro_account",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "account_id"))
+    private List<GiroAccount> giroAccounts;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "customer_savings_account",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "account_id"))
+    private List<SavingsAccount> savingsAccounts;*/
 }

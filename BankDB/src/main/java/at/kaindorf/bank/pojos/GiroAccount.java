@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import java.util.List;
 
 /*
     Created by: Jonas Seidl
@@ -27,4 +29,7 @@ public class GiroAccount extends Account {
 
     @Column(name="credit_interest")
     private float creditInterest;
+
+    /*@ManyToMany(mappedBy = "giroAccounts")
+    private List<Customer> customer;*/
 }

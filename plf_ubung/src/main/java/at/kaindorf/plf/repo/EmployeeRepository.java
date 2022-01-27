@@ -15,6 +15,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
     @Query("SELECT MAX(e.empno) FROM emp e")
     Integer findMaxEmpno();
 
-    @Query("SELECT e, s FROM emp e INNER JOIN Salgrade s ON e.sal BETWEEN s.losal AND s.hisal")
     Map<Employee, Salgrade> findAllWithSalgrade();
 }
