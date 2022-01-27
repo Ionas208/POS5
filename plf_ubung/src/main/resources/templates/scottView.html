@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" >
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Choose Dept</h1>
+    <form th:method="POST" th:object="${util}" th:action="@{/scottdb}">
+        <div th:each="dept: ${departments}">
+            <input type="radio"  th:field="*{chosenDeptNo}" th:value="${dept.deptno}" onclick="submit();"/>
+            <label th:text="${dept.dname}"></label>
+        </div>
+    </form>
+    <table th:if="${employees != null}">
+        <thead>
+            <tr>
+               <th>Name</th>
+               <th>Job</th>
+               <th>Hiredate</th>
+               <th>Salary</th>
+               <th>Salgrade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="emp: ${employees}">
+                <td th:text="${emp.ename}"></td>
+                <td th:text="${emp.job}"></td>
+                <td th:text="${#temporals.format(emp.hiredate, 'dd-MM-yyyy')}"></td>
+                <td th:text="${'€ '+#numbers.formatDecimal(emp.sal, 3, 'POINT', 2, 'COMMA')}"></td>
+                <td th:text="${salgradeRepository.findBySal(emp.sal).getGrade()}"></td>
+            </tr>
+            <form th:method="POST" th:action="@{/scottdb/addEmp}" th:object="${emp2Insert}">
+                <input type="hidden" th:field="${util.chosenDeptNo}" th:value="${util.chosenDeptNo}">
+                <tr>
+                    <td>
+                        <input type="text" th:field="*{ename}"><br>
+                        <span class="errors" th:if="${#fields.hasErrors('ename')}" th:errors="*{ename}"></span>
+                    </td>
+                    <td>
+                        <input type="text" th:field="*{job}"><br>
+                        <span class="errors" th:if="${#fields.hasErrors('job')}" th:errors="*{job}"></span>
+                    </td>
+                    <td>
+                        <input type="date" th:field="*{hiredate}"><br>
+                        <span class="errors" th:if="${#fields.hasErrors('hiredate')}" th:errors="*{hiredate}"></span>
+                    </td>
+                    <td>
+                        <input type="number" th:field="*{sal}"><br>
+                        <span class="errors" th:if="${#fields.hasErrors('sal')}" th:errors="*{sal}"></span>
+                    </td>
+                    <td>
+                        <input type="submit" value="Add">
+                    </td>
+                </tr>
+            </form>
+
+        </tbody>
+    </table>
+</body>
+</html>
