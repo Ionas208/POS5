@@ -2,6 +2,7 @@ package at.kaindorf.exam.controller;
 
 import at.kaindorf.exam.pojos.Exam;
 import at.kaindorf.exam.pojos.Student;
+import at.kaindorf.exam.pojos.Subject;
 import at.kaindorf.exam.repo.ClassnameRepository;
 import at.kaindorf.exam.repo.ExamRepository;
 import at.kaindorf.exam.repo.StudentRepository;
@@ -48,6 +49,17 @@ public class ExamController {
         }
         List<Exam> exams = examRepository.findAllByStudent(student.get());
         return ResponseEntity.of(Optional.of(exams));
+    }
+
+    @GetMapping("/getAllSubjects")
+    public ResponseEntity<List<Subject>> getAllSubjects() {
+        List<Subject> subjects = subjectRepository.findAll();
+        return ResponseEntity.of(Optional.of(subjects));
+    }
+
+    @GetMapping("/getById")
+    public ResponseEntity<Exam> getById(@RequestParam Long exam_id) {
+        return ResponseEntity.of(examRepository.findById(exam_id));
     }
 
     @PatchMapping("/update")
