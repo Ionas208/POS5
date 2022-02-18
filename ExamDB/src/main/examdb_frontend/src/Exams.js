@@ -33,7 +33,13 @@ function Exams() {
             "dateofexam": date,
             "duration": duration
         }
-        api.post("/student/addExam?student_id="+exams[0].student.id+"&subject_id="+subjectId, exam).then(res => {
+        api.post("/student/addExam?student_id="+id+"&subject_id="+subjectId, exam).then(res => {
+            getExams();
+        });
+    }
+
+    const deleteExam = (exam_id) => {
+        api.delete("/exam/remove?exam_id="+exam_id).then(res => {
             getExams();
         });
     }
@@ -45,6 +51,7 @@ function Exams() {
 
     return (
         <div>
+            <h1>List of Exams</h1>
             <table>
                 <thead>
                     <tr>
@@ -59,7 +66,7 @@ function Exams() {
                             <td>{exam.subject.longname}</td>
                             <td>{exam.dateofexam}</td>
                             <td>{exam.duration}</td>
-                            <td><button>Delete</button></td>
+                            <td><button onClick={e => deleteExam(exam.id)}>Delete</button></td>
                             <td>
                                 <Link to={"/exam/"+exam.id}>
                                     <button>

@@ -37,6 +37,7 @@ function Students() {
   if(students.length === 0) {
     return (
       <div>
+        <h1>List of Students</h1>
         <div>
           <select onChange={e => getStudents(e.target.value)}>
             <option>Select Class</option>
@@ -50,6 +51,7 @@ function Students() {
   } else {
     return (
       <div>
+        <h1>List of Students</h1>
         <div>
           <select onChange={e => getStudents(e.target.value)}>
             <option>Select Class</option>
