@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /*
@@ -15,16 +16,12 @@ import java.time.LocalDateTime;
     Time: 12:17
 */
 public class LocalDateTimeDeserializer extends StdDeserializer<LocalDateTime> {
-    protected LocalDateTimeDeserializer(Class<?> vc) {
-        super(vc);
-    }
     public LocalDateTimeDeserializer() {
-        this(null);
+        super(LocalDateTime.class);
     }
 
     @Override
     public LocalDateTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException, JacksonException {
-        JsonNode node = jsonParser.getCodec().readTree(jsonParser);
-        return LocalDateTime.parse(node.asText());
+        return LocalDateTime.parse(jsonParser.readValueAs(String.class));
     }
 }

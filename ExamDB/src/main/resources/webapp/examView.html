@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ExamDB</title>
+    <script src="exams.js"></script>
+</head>
+<body>
+<h1>List of Students</h1>
+    <select id="classnames">
+        <option>Select Class</option>
+    </select>
+    <table id="student_table" style="display: none">
+        <thead>
+            <th>Firstname</th>
+            <th>Lastname</th>
+        </thead>
+        <tbody id="student_table_body">
+
+        </tbody>
+    </table>
+    <div id="page_container">
+    </div>
+</body>
+<style>
+    #page_container{
+        display: flex;
+        flex-direction: row;
+    }
+
+    .page_item{
+        margin: 5px;
+        background-color: lightgrey;
+        padding: 2px;
+        cursor: pointer;
+    }
+
+    .page_item:active{
+        background-color: grey;
+        cursor: none;
+    }
+</style>
+<script>
+    let res = fetch('url',{
+        method: "POST",
+        contentType: "application/json",
+        body: JSON.stringify({
+            "classname": "",
+            "page": 1
+        })
+    })
+</script>
+</html>
