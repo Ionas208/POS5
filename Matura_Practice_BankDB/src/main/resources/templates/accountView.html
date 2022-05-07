@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Accounts</h1>
+
+<h2 th:if="${giroAccounts.size() > 0}">Giro Accounts</h2>
+<table th:if="${giroAccounts.size() > 0}">
+    <thead>
+        <tr>
+            <th>Number</th>
+            <th>Balance</th>
+            <th>Overdraft Limit</th>
+            <th>Debit</th>
+            <th>Credit</th>
+            <th>Amount</th>
+            <th>Update</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="a : ${giroAccounts}">
+            <td th:text="${a.accountNumber}"></td>
+            <td th:text="${a.balance}"></td>
+            <td th:text="${a.overdraft}"></td>
+            <td th:text="${a.debitInterest}"></td>
+            <td th:text="${a.creditInterest}"></td>
+            <form th:method="POST" th:action="@{/account/withdraw}">
+                <td><input type="number" th:name="amount" min="0.00" step=".01"></td>
+                <td>
+                    <input type="submit" th:name="action" th:value="${'+'}"/>
+                    <input type="submit" th:name="action" th:value="${'-'}"/>
+                    <input type="hidden" th:name="accountId" th:value="${a.accountId}">
+                </td>
+            </form>
+            <span th:if="${withdrawErrorId == a.accountId}" th:text="${withdrawError}">ERROR</span>
+        </tr>
+    </tbody>
+</table>
+
+<h2 th:if="${savingsAccounts.size() > 0}">Savings Accounts</h2>
+<table th:if="${savingsAccounts.size() > 0}">
+    <thead>
+    <tr>
+        <th>Number</th>
+        <th>Balance</th>
+        <th>Interest</th>
+        <th>Amount</th>
+        <th>Update</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="a : ${savingsAccounts}">
+        <td th:text="${a.accountNumber}"></td>
+        <td th:text="${a.balance}"></td>
+        <td th:text="${a.interest}"></td>
+        <form th:method="POST" th:action="@{/account/withdraw}">
+            <td><input type="number" th:name="amount" min="0.00" step=".01"></td>
+            <td>
+                <input type="submit" th:name="action" th:value="${'+'}"/>
+                <input type="submit" th:name="action" th:value="${'-'}"/>
+                <input type="hidden" th:name="accountId" th:value="${a.accountId}">
+            </td>
+        </form>
+        <span th:if="${withdrawErrorId == a.accountId}" th:text="${withdrawError}">ERROR</span>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/customer}">Back to Overview</a>
+</body>
+</html>
+<style>
+    table{
+        border-collapse: collapse;
+    }
+    td{
+        border: 1px solid black;
+    }
+</style>
