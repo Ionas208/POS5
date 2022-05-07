@@ -1,8 +1,8 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.*;
 
 /*
     Created by: Jonas Seidl
@@ -17,7 +17,7 @@ public class Main {
         //t1.start();
         //t2.start();
 
-        FutureTask<String> f = new FutureTask(new CreateSomething());
+        /*FutureTask<String> f = new FutureTask(new CreateSomething());
         Thread t3 = new Thread(f);
         t3.start();
         try {
@@ -26,7 +26,25 @@ public class Main {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
+        }*/
+        ExecutorService pool = Executors.newFixedThreadPool(10);
+        ExecutorCompletionService<String> service = new ExecutorCompletionService<>(pool);
+        for (int i = 0; i < 10; i++) {
+            service.submit(new CreateSomething());
         }
-
+        pool.shutdown();
+        List<String> results = new ArrayList<>();
+         while(!pool.isTerminated()){
+            try {
+                String result = service.take().get();
+                System.out.println(result);
+                results.add(result);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(results);
     }
 }

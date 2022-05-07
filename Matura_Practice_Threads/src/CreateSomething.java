@@ -8,7 +8,8 @@ import java.util.concurrent.Callable;
 public class CreateSomething implements Callable<String> {
     @Override
     public String call() throws Exception {
-        Thread.sleep(1000);
+        Thread.sleep(100);
+        System.out.println("h");
         return "Your mom";
     }
 }
