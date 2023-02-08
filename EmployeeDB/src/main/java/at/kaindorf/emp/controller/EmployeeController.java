@@ -10,10 +10,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Null;
+import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -72,6 +74,21 @@ public class EmployeeController {
             Employee e = employeeRepository.findById(empNo).get();
             e.setDepartment(null);
         }
+        return "listView";
+    }
+
+    @PostMapping("/asd")
+    public String dos(){
+        Employee oldEmp = new Employee();
+        Employee newEmp = new Employee();
+        for (Field f: newEmp.getClass().getDeclaredFields()) {
+            Object obj = ReflectionUtils.getField(f, newEmp);
+            f.setAccessible(true);
+            if(obj != null){
+                ReflectionUtils.setField(f, oldEmp, obj);
+            }
+        }
+        // set with repo
         return "listView";
     }
 }

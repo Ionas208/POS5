@@ -51,8 +51,6 @@ public class AccountController {
 
         model.addAttribute("customer", customerId);
 
-        System.out.println(customerRepository.getTotalBalance(c));
-
         return "accountView";
     }
 
@@ -79,7 +77,6 @@ public class AccountController {
             List<GiroAccount> giroAccounts = giroAccountRepository.findAll();
             giroAccounts.removeIf(ac -> !ac.getCustomers().contains(c));
             model.addAttribute("giroAccounts", giroAccounts);
-            System.out.println(customerRepository.getTotalBalance(c));
 
         }else if(savingsAccountRepository.existsById(accountId)){
             SavingsAccount a = savingsAccountRepository.getById(accountId);
@@ -96,7 +93,6 @@ public class AccountController {
             List<SavingsAccount> savingsAccounts = savingsAccountRepository.findAll();
             savingsAccounts.removeIf(ac -> !ac.getCustomers().contains(c));
             model.addAttribute("savingsAccounts", savingsAccounts);
-            System.out.println(customerRepository.getTotalBalance(c));
         }
 
         return "accountView";

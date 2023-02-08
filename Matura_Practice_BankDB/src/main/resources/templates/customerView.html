@@ -8,9 +8,14 @@
 </head>
 <body>
 <h1>Customers</h1>
-<form th:method="GET" th:action="@{/customer/filter}">
+<form th:method="GET" th:action="@{/customer/filter}" th:object="${util}">
 
     <input type="text" th:name="lastname"><br>
+    <input type="date" th:field="*{date}"><br>
+    <select th:field="*{option}">
+        <option th:value="A">A</option>
+        <option th:value="B">B</option>
+    </select>
     <input type="submit" th:value="Search">
 </form>
 <form th:method="GET" th:action="@{/account}">

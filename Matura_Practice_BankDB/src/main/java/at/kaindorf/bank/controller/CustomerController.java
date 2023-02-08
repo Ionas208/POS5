@@ -24,27 +24,36 @@ import java.util.List;
 */
 @Controller
 @Slf4j
-@SessionAttributes({"customers"})
+@SessionAttributes({"customers", "util"})
 @RequestMapping("/customer")
 public class CustomerController {
 
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private AccountRepository accountRepository;
 
     @ModelAttribute
     public void addAttributes(Model model) {
         model.addAttribute("customers", new ArrayList<>());
-        model.addAttribute("giroAccounts", new ArrayList<>());
-        model.addAttribute("savingsAccounts", new ArrayList<>());
+        model.addAttribute("util", new Util());
     }
 
     @GetMapping
     public String getCustomer() {
+        System.out.println(accountRepository.getAverageBalanceOfNegative());
+        System.out.println(accountRepository.getNumberOfAccountsWithMultipleCustomers());
+        System.out.println(customerRepository.getCustomerByHighestBalance());
         return "customerView";
     }
 
     @GetMapping("/filter")
-    public String filterByLastname(Model model, @RequestParam(name = "lastname", required = true) String lastname) {
+    public String filterByLastname(Model model,
+                                   @RequestParam(name = "lastname", required = true) String lastname,
+                                   @ModelAttribute Util util,
+                                   @RequestParam(name = "option" ,required = false) String option) {
+        System.out.println(util);
+        System.out.println(option);
         List<Customer> customers = customerRepository.findAllByLastnameContaining(lastname, Sort.by("lastname", "firstname"));
         model.addAttribute("customers", customers);
         return "customerView";

@@ -17,9 +17,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@NamedQueries({
-        @NamedQuery(name="getTotalBalance", query = "SELECT SUM(a.balance) FROM Account a ")
-})
 public class Customer {
     @Id
     @Column(name = "customer_id")
